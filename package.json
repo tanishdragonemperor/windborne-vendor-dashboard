@@ -1,0 +1,8 @@
+{
+  "name": "windborne-vendor-dashboard",
+  "version": "1.0.0",
+  "description": "Vendor analysis dashboard for WindBorne Systems",
+  "dependencies": {
+    "axios": "^1.12.2"
+  }
+}
