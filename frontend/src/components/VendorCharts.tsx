@@ -23,14 +23,6 @@ interface VendorChartsProps {
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];
 
 const VendorCharts: React.FC<VendorChartsProps> = ({ vendors }) => {
-  const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      notation: 'compact',
-      maximumFractionDigits: 1
-    }).format(value);
-  };
 
   const revenueData = vendors
     .filter(v => v.overview?.RevenueTTM)
@@ -90,7 +82,7 @@ const VendorCharts: React.FC<VendorChartsProps> = ({ vendors }) => {
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" />
               <YAxis />
-              <Tooltip formatter={(value) => [`$${value.toFixed(1)}B`, '']} />
+              <Tooltip formatter={(value) => [`$${Number(value).toFixed(1)}B`, '']} />
               <Legend />
               <Bar dataKey="revenue" fill="#8884d8" name="Revenue (TTM)" />
               <Bar dataKey="marketCap" fill="#82ca9d" name="Market Cap" />
@@ -105,7 +97,7 @@ const VendorCharts: React.FC<VendorChartsProps> = ({ vendors }) => {
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" />
               <YAxis />
-              <Tooltip formatter={(value) => [`${value.toFixed(1)}%`, '']} />
+              <Tooltip formatter={(value) => [`${Number(value).toFixed(1)}%`, '']} />
               <Legend />
               <Bar dataKey="profitMargin" fill="#ffc658" name="Profit Margin" />
               <Bar dataKey="roe" fill="#ff7300" name="Return on Equity" />
@@ -122,12 +114,12 @@ const VendorCharts: React.FC<VendorChartsProps> = ({ vendors }) => {
                 cx="50%"
                 cy="50%"
                 labelLine={false}
-                label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                label={({ name, percent }: any) => `${name} ${(percent * 100).toFixed(0)}%`}
                 outerRadius={80}
                 fill="#8884d8"
                 dataKey="value"
               >
-                {sectorData.map((entry, index) => (
+                {sectorData.map((_entry, index) => (
                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>
@@ -144,7 +136,7 @@ const VendorCharts: React.FC<VendorChartsProps> = ({ vendors }) => {
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="year" />
                 <YAxis />
-                <Tooltip formatter={(value) => [`$${value?.toFixed(1)}B`, '']} />
+                <Tooltip formatter={(value) => [`$${Number(value || 0).toFixed(1)}B`, '']} />
                 <Legend />
                 {vendors.map((vendor, index) => (
                   <Line

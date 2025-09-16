@@ -19,15 +19,6 @@ const VendorTable: React.FC<VendorTableProps> = ({ vendors, onExportCSV }) => {
     }).format(num);
   };
 
-  const formatNumber = (value: string | undefined) => {
-    if (!value || value === 'None' || value === '-') return 'N/A';
-    const num = parseFloat(value);
-    if (isNaN(num)) return 'N/A';
-    return new Intl.NumberFormat('en-US', {
-      notation: 'compact',
-      maximumFractionDigits: 1
-    }).format(num);
-  };
 
   const getVendorFlags = (vendor: VendorData): VendorFlag[] => {
     const flags: VendorFlag[] = [];

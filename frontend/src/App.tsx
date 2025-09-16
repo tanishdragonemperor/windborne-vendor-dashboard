@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { VendorData } from './types/vendor';
 import { vendorApi } from './api/vendorApi';
 import VendorTable from './components/VendorTable';
